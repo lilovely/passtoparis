@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PASSPORT TO PARIS — Ваш момент в Париже</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ffffff;
+    --paper-2:#fdf1f0;
+    --paper-3:#fbe6e9;
+    --ink:#211417;
+    --ink-mute:rgba(33,20,23,.62);
+    --red:#c31f2e;
+    --red-deep:#8f141f;
+    --pink:#eb9fb8;
+    --pink-deep:#e07a9c;
+    --pink-pale:#fbd9e2;
+    --green:#3f7a5c;
+    --green-pale:#e2f0e7;
+    --gold:#c79a4b;
+    --line: rgba(195,31,46,.18);
+    --shadow: 0 24px 50px -24px rgba(33,20,23,.22);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ background:var(--paper); color:var(--ink); font-family:'Jost', sans-serif; font-weight:300; overflow-x:hidden;}
+  .display{ font-family:'Bebas Neue', sans-serif; letter-spacing:.03em; font-weight:400;}
+  .eyebrow{ font-family:'Jost', sans-serif; text-transform:uppercase; letter-spacing:.3em; font-size:11px; color:var(--red); font-weight:500;}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  ::selection{background:var(--pink-pale); color:var(--red-deep);}
+
+  header{ position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:24px 40px; transition:all .35s ease;}
+  header.scrolled{ background:rgba(255,255,255,.88); backdrop-filter:blur(10px); padding:14px 40px; border-bottom:1px solid var(--line);}
+  .logo{ font-family:'Bebas Neue', sans-serif; font-size:26px; letter-spacing:.06em; color:var(--red);}
+  .logo span{color:var(--ink);}
+  nav.mainnav{ display:flex; gap:30px; align-items:center;}
+  nav.mainnav a{ font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-mute); position:relative; padding-bottom:4px;}
+  nav.mainnav a:hover{color:var(--red);}
+  nav.mainnav a::after{ content:''; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--red); transition:width .3s ease;}
+  nav.mainnav a:hover::after{width:100%;}
+  .langswitch{ display:flex; gap:2px; border:1px solid var(--line); border-radius:20px; padding:3px;}
+  .langswitch button{ font-family:'Jost'; font-size:11px; letter-spacing:.06em; padding:6px 13px; border-radius:16px; color:var(--ink-mute); background:transparent; cursor:pointer; border:none;}
+  .langswitch button.active{ background:var(--red); color:#fff; font-weight:500;}
+
+  .hero{ min-height:100vh; position:relative; display:flex; flex-direction:column; justify-content:center; padding:150px 40px 0;
+    background: radial-gradient(ellipse 70% 55% at 85% 10%, rgba(235,159,184,.24), transparent 60%), radial-gradient(ellipse 50% 40% at 8% 85%, rgba(63,122,92,.10), transparent 60%), var(--paper);}
+  .hero-grid{ max-width:1120px; margin:0 auto; width:100%; display:grid; grid-template-columns:1.15fr .85fr; gap:50px; align-items:center;}
+  .hero h1{ font-family:'Bebas Neue', sans-serif; font-weight:400; font-size:clamp(48px, 7.2vw, 94px); line-height:.96; color:var(--red); margin:20px 0 22px; letter-spacing:.01em;}
+  .hero h1 .sub-word{ color:var(--ink); display:block;}
+  .hero-title-wrap{ position:relative; display:inline-block;}
+  .sparkle{ position:absolute; fill:var(--gold); stroke:none; animation:twinkle 2.6s ease-in-out infinite;}
+  .sparkle.sp1{ width:20px; height:20px; top:-6px; left:6%; animation-delay:0s;}
+  .sparkle.sp2{ width:13px; height:13px; top:2px; left:38%; fill:var(--pink-deep); animation-delay:.9s;}
+  .sparkle.sp3{ width:15px; height:15px; top:-14px; left:60%; animation-delay:1.7s;}
+  @keyframes twinkle{ 0%,100%{opacity:.25; transform:scale(.8) rotate(0deg);} 50%{opacity:1; transform:scale(1.1) rotate(12deg);} }
+  .hero p.lede{ color:var(--ink-mute); max-width:440px; margin-bottom:36px; font-family:'Jost', sans-serif; font-weight:300; font-style:normal; font-size:16.5px; line-height:1.75;}
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{ display:inline-flex; align-items:center; gap:10px; padding:15px 30px; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; border-radius:2px; transition:all .3s ease; font-family:'Jost'; font-weight:500;}
+  .btn-red{ background:var(--red); color:#fff; border:1px solid var(--red);}
+  .btn-red:hover{ background:var(--red-deep); border-color:var(--red-deep); transform:translateY(-1px);}
+  .btn-ghost{ background:transparent; color:var(--ink); border:1px solid var(--line);}
+  .btn-ghost:hover{ border-color:var(--red); color:var(--red);}
+
+  .hero-art{ position:relative;}
+  .hero-art svg{ width:100%; height:auto;}
+  .hero-art .fade{ opacity:0; animation:fadeup 1s ease forwards;}
+  .hero-art .fade:nth-child(1){animation-delay:.1s;}
+  .hero-art .fade:nth-child(2){animation-delay:.3s;}
+  .hero-art .fade:nth-child(3){animation-delay:.5s;}
+  .hero-art .fade:nth-child(4){animation-delay:.7s;}
+  @keyframes fadeup{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+
+  .scallop{ width:100%; height:34px; margin-top:60px; position:relative;}
+  .scallop svg{width:100%; height:34px; position:absolute; top:0; left:0;}
+  .scallop .s1{ stroke:var(--red); stroke-width:1.6; fill:none;}
+  .scallop .s2{ stroke:var(--green); stroke-width:1.2; fill:none; opacity:.55; stroke-dasharray:2 6;}
+
+  .scrolldown{ position:absolute; bottom:26px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--ink-mute); font-size:10px; letter-spacing:.22em; text-transform:uppercase;}
+  .scrolldown .line{ width:1px; height:30px; background:linear-gradient(var(--red), transparent); animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{ 0%,100%{opacity:.35;} 50%{opacity:1;} }
+
+  .path-section{ background:var(--paper-2); padding:130px 0 100px; position:relative;}
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 70px;}
+  .section-head h2{ font-family:'Jost', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.015em; font-size:clamp(28px,3.4vw,40px); color:var(--ink); margin-top:12px;}
+  .section-head p{ color:var(--ink-mute); margin-top:16px; font-size:15.5px; line-height:1.7;}
+
+  .path-wrap{ position:relative; max-width:1080px; margin:0 auto; padding:0 20px;}
+  .services-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:28px; position:relative; z-index:1;}
+  .service-card{ text-align:center; padding:34px 18px; background:#fff; box-shadow:var(--shadow); border-radius:2px; transition:transform .3s ease;}
+  .service-card:hover{ transform:translateY(-6px);}
+  .service-icon{ width:76px; height:76px; margin:0 auto 22px; border-radius:50%; background:var(--pink-pale); border:1px solid var(--line); display:flex; align-items:center; justify-content:center;}
+  .service-icon svg{ width:36px; height:36px; stroke:var(--red); fill:none; stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round;}
+  .service-card:nth-child(even) .service-icon{ background:var(--green-pale); border-color:rgba(63,122,92,.25);}
+  .service-card:nth-child(even) .service-icon svg{ stroke:var(--green);}
+  .service-card .num{ color:var(--red); font-size:15px; letter-spacing:.08em; display:block; margin-bottom:8px; font-weight:500; font-family:'Cormorant Garamond'; font-style:italic;}
+  .service-card:nth-child(even) .num{ color:var(--green);}
+  .service-card h3{ font-family:'Jost', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.02em; font-size:21px; color:var(--ink); margin-bottom:10px;}
+  .service-card p{ color:var(--ink-mute); font-size:13.5px; line-height:1.72;}
+
+  .portfolio{ background:var(--paper); padding:120px 0 100px;}
+  .portfolio-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; max-width:1080px; margin:0 auto;}
+  .portfolio-card{ aspect-ratio:4/3; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; background:var(--pink-pale); position:relative; padding:20px;}
+  .portfolio-card:nth-child(3n+2){ background:var(--green-pale);}
+  .portfolio-card:nth-child(3n){ background:var(--paper-3);}
+  .pf-icon svg{ width:36px; height:36px; stroke:var(--ink); opacity:.5; fill:none; stroke-width:1.1;}
+  .portfolio-card p{ font-size:12.5px; color:var(--ink); text-align:center; font-weight:500; letter-spacing:.01em; line-height:1.5;}
+  .portfolio-note{ text-align:center; margin-top:28px; font-size:12px; color:var(--ink-mute); font-family:'Cormorant Garamond'; font-style:italic;}
+
+  .pricing{ background:var(--paper-2); padding:120px 0 120px;}
+  .price-tabs{ display:flex; justify-content:center; gap:10px; margin-bottom:56px; flex-wrap:wrap;}
+  .price-tab{ padding:10px 22px; border:1px solid var(--line); border-radius:20px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; color:var(--ink-mute); background:transparent; font-family:'Jost';}
+  .price-tab.active{ background:var(--red); color:#fff; border-color:var(--red);}
+  .price-group{ display:none; }
+  .price-group.active{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .price-group[data-group="devichnik"].active{ grid-template-columns:repeat(4,1fr);}
+  .price-card{ background:#fff; border:1px solid var(--line); padding:36px 24px; position:relative; transition:transform .3s ease, box-shadow .3s ease;}
+  .price-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow);}
+  .price-card.featured{ border:1px solid var(--red);}
+  .price-card .tag{ position:absolute; top:-13px; left:24px; background:var(--red); color:#fff; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; padding:5px 12px; font-weight:500;}
+  .price-card h4{ font-family:'Jost', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.03em; font-size:17px; margin-bottom:4px;}
+  .price-card .amount{ font-family:'Bebas Neue'; font-weight:400; font-size:34px; color:var(--red); margin:12px 0 16px;}
+  .price-card .amount span{ font-size:13px; color:var(--ink-mute); font-family:'Jost';}
+  .price-card ul{ list-style:none; margin-bottom:24px;}
+  .price-card li{ font-size:13px; color:var(--ink-mute); padding:7px 0; border-bottom:1px dashed var(--line);}
+  .price-card .btn-line{ display:inline-block; font-size:12px; letter-spacing:.08em; text-transform:uppercase; border-bottom:1px solid var(--red); color:var(--red); padding-bottom:3px; cursor:pointer;}
+  .price-note{ grid-column:1/-1; text-align:center; font-size:15px; color:var(--ink-mute); font-style:italic; font-family:'Cormorant Garamond'; margin-top:4px;}
+  .price-note.gift{ color:var(--gold); font-weight:600; margin-top:14px;}
+
+  .booking{ background:var(--paper-3); padding:130px 0; position:relative;}
+  .booking-grid{ display:grid; grid-template-columns:.95fr 1.05fr; gap:70px; align-items:flex-start;}
+  .booking .section-head{ text-align:left; margin:0 0 34px; max-width:none;}
+  .booking .section-head p{max-width:420px;}
+  .book-steps{ margin-top:36px; display:flex; flex-direction:column; gap:22px;}
+  .book-step{ display:flex; gap:16px; align-items:flex-start;}
+  .book-step .n{ font-family:'Bebas Neue'; font-size:24px; color:var(--red); width:30px; flex-shrink:0;}
+  .book-step div p{ font-size:14px; color:var(--ink-mute); line-height:1.65;}
+
+  .booking-card{ background:#fff; padding:38px; box-shadow:var(--shadow);}
+  .field-label{ font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:10px; display:block;}
+  select.pkg-select{ width:100%; padding:13px 14px; border:1px solid var(--line); background:#fff; font-family:'Jost'; font-size:14px; margin-bottom:26px; color:var(--ink); appearance:none;
+    background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='%23c31f2e' d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat:no-repeat; background-position:right 12px center; background-size:18px;}
+  .booking-card input.text-input{ width:100%; padding:13px 14px; border:1px solid var(--line); background:#fff; font-family:'Jost'; font-size:14px; margin-bottom:26px; color:var(--ink);}
+  .cal-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .cal-header .month{ font-family:'Bebas Neue'; letter-spacing:.02em; font-size:19px;}
+  .cal-header button{ background:none; border:1px solid var(--line); width:30px; height:30px; cursor:pointer; font-family:'Jost'; color:var(--ink);}
+  .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:5px; margin-bottom:26px;}
+  .cal-grid .dow{ font-size:10.5px; text-align:center; color:var(--ink-mute); letter-spacing:.05em; padding-bottom:6px;}
+  .cal-day{ aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:13px; cursor:pointer; border:1px solid var(--line); color:var(--ink); background:#fff;}
+  .cal-day.blank{ visibility:hidden; cursor:default; border:none;}
+  .cal-day.taken{ color:rgba(33,20,23,.28); text-decoration:line-through; cursor:not-allowed; background:rgba(33,20,23,.03); border-color:transparent;}
+  .cal-day.avail:hover{ border-color:var(--red);}
+  .cal-day.selected{ background:var(--red); color:#fff; font-weight:500; border-color:var(--red);}
+  .legend{ display:flex; gap:18px; font-size:11.5px; color:var(--ink-mute); margin-bottom:28px;}
+  .legend span{ display:inline-flex; align-items:center; gap:6px;}
+  .legend i{ width:9px; height:9px; display:inline-block;}
+  .legend .a i{ background:#fff; border:1px solid var(--line);}
+  .legend .b i{ background:rgba(33,20,23,.08);}
+  .legend .c i{ background:var(--red);}
+
+  .summary{ border-top:1px solid var(--line); padding-top:22px; margin-top:6px;}
+  .summary-row{ display:flex; justify-content:space-between; font-size:13.5px; padding:6px 0; color:var(--ink-mute);}
+  .summary-row.total{ color:var(--ink); font-family:'Bebas Neue'; letter-spacing:.02em; font-size:20px; padding-top:12px; border-top:1px dashed var(--line); margin-top:6px;}
+  .pay-btn{ width:100%; margin-top:22px; padding:16px; background:var(--red); color:#fff; border:none; font-family:'Jost'; font-size:13px; letter-spacing:.09em; text-transform:uppercase; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;}
+  .pay-btn:hover{ background:var(--red-deep);}
+  .pay-btn:disabled{ opacity:.35; cursor:not-allowed;}
+  .stripe-note{ font-size:11px; color:var(--ink-mute); text-align:center; margin-top:12px; display:flex; align-items:center; justify-content:center; gap:6px;}
+
+  .modal-bg{ position:fixed; inset:0; background:rgba(33,20,23,.55); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; z-index:1000; padding:20px;}
+  .modal-bg.show{ display:flex;}
+  .modal{ background:#fff; color:var(--ink); max-width:420px; width:100%; padding:36px; position:relative;}
+  .modal h3{ font-family:'Bebas Neue'; letter-spacing:.02em; font-size:26px; margin-bottom:6px;}
+  .modal p.sub{ font-size:13px; color:var(--ink-mute); margin-bottom:24px;}
+  .modal input{ width:100%; padding:12px 14px; border:1px solid var(--line); margin-bottom:14px; font-family:'Jost'; font-size:13.5px; background:#fff;}
+  .modal .row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .modal .close{ position:absolute; top:18px; right:20px; cursor:pointer; font-size:18px; color:var(--ink-mute); background:none; border:none;}
+  .reminder-note{ font-size:12px; color:var(--ink); background:var(--paper-2); border-left:2px solid var(--gold); padding:10px 12px; margin-bottom:18px; line-height:1.55;}
+  .modal .success{ text-align:center; display:none;}
+  .modal .success.show{ display:block;}
+  .modal .success svg{ margin:0 auto 18px; width:52px; height:52px; stroke:var(--red);}
+  .modal .formstate.hidden{ display:none;}
+
+  footer{ background:#fff; padding:80px 0 30px; border-top:1px solid var(--line);}
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:60px; margin-bottom:60px;}
+  .foot-grid h5{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--red); margin-bottom:18px;}
+  .foot-grid p, .foot-grid a{ font-size:13.5px; color:var(--ink-mute); line-height:2;}
+  .foot-grid a:hover{ color:var(--red);}
+  .foot-bottom{ display:flex; justify-content:space-between; padding-top:26px; border-top:1px solid var(--line); font-size:11.5px; color:var(--ink-mute); flex-wrap:wrap; gap:10px;}
+
+  @media (max-width:960px){
+    .price-group[data-group="devichnik"].active{ grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:860px){
+    .hero-grid{ grid-template-columns:1fr;}
+    .hero-art{ order:-1; max-width:260px; margin:0 auto;}
+    .services-row{ grid-template-columns:1fr 1fr; gap:20px;}
+    .portfolio-grid{ grid-template-columns:1fr 1fr;}
+    .price-group.active, .price-group[data-group="devichnik"].active{ grid-template-columns:1fr;}
+    .booking-grid{ grid-template-columns:1fr;}
+    .foot-grid{ grid-template-columns:1fr; gap:34px;}
+    nav.mainnav{ display:none;}
+    .modal .row2{ grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="logo">PASSPORT <span>TO PARIS</span></div>
+  <nav class="mainnav">
+    <a href="#services" data-i18n="nav_services">Услуги</a>
+    <a href="#portfolio" data-i18n="nav_portfolio">Портфолио</a>
+    <a href="#pricing" data-i18n="nav_pricing">Тарифы</a>
+    <a href="#booking" data-i18n="nav_booking">Бронирование</a>
+    <a href="#contact" data-i18n="nav_contact">Контакты</a>
+  </nav>
+  <div class="langswitch">
+    <button data-lang="ru" class="active">RU</button>
+    <button data-lang="en">EN</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow" data-i18n="hero_eyebrow">PARIS · ОРГАНИЗАТОРЫ СОБЫТИЙ</span>
+      <div class="hero-title-wrap">
+        <svg class="sparkle sp1" viewBox="0 0 24 24"><path d="M12 2 L13.4 9.6 L21 11 L13.4 12.4 L12 20 L10.6 12.4 L3 11 L10.6 9.6 Z"/></svg>
+        <svg class="sparkle sp2" viewBox="0 0 24 24"><path d="M12 2 L13.4 9.6 L21 11 L13.4 12.4 L12 20 L10.6 12.4 L3 11 L10.6 9.6 Z"/></svg>
+        <svg class="sparkle sp3" viewBox="0 0 24 24"><path d="M12 6 L12.8 10.2 L17 11 L12.8 11.8 L12 16 L11.2 11.8 L7 11 L11.2 10.2 Z"/></svg>
+        <h1 data-i18n="hero_title">ВАШ МОМЕНТ<span class="sub-word">В ПАРИЖЕ</span></h1>
+      </div>
+      <p class="lede" data-i18n="hero_lede">Организуем вашу мечту в Париже — предложения руки и сердца, пикники, девичники и консьерж-сопровождение.</p>
+      <div class="cta-row">
+        <a href="#booking" class="btn btn-red" data-i18n="hero_cta">Забронировать дату</a>
+        <a href="#pricing" class="btn btn-ghost" data-i18n="hero_cta2">Смотреть тарифы</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg">
+        <g class="fade" transform="rotate(-5 160 190)">
+          <rect x="55" y="35" width="210" height="270" fill="none" stroke="var(--pink)" stroke-width="1.1" stroke-dasharray="4 6"/>
+        </g>
+        <g class="fade">
+          <path d="M160 55 L120 218 L85 218 M160 55 L200 218 L235 218 M102 163 L218 163 M92 218 L228 218 L228 232 L92 232 Z M110 232 L110 328 M210 232 L210 328 M95 328 L225 328 M130 258 L190 258 M125 286 L195 286 M120 312 L200 312 M150 35 L170 35 L160 55 Z" stroke="var(--red)" stroke-width="1.3" fill="none"/>
+        </g>
+        <g class="fade" transform="translate(238,72) rotate(12)">
+          <rect x="-32" y="-32" width="64" height="64" fill="#fff" stroke="var(--pink)" stroke-width="1"/>
+          <circle cx="0" cy="6" r="12" fill="none" stroke="var(--red)" stroke-width="1.6"/>
+          <path d="M0 -10 L-6 -19 L6 -19 Z" fill="none" stroke="var(--red)" stroke-width="1.3"/>
+          <path d="M-13 -17 L-16 -23 M13 -17 L16 -23 M0 -21 L0 -27" stroke="var(--pink)" stroke-width="1"/>
+        </g>
+        <g class="fade" transform="translate(65,305) rotate(-8)">
+          <path d="M0 40 L0 -4" stroke="var(--green)" stroke-width="1.4" fill="none"/>
+          <path d="M0 22 Q-15 26 -19 13" stroke="var(--green)" stroke-width="1.2" fill="none"/>
+          <g stroke="var(--pink)" stroke-width="1.3" fill="none">
+            <ellipse cx="0" cy="-18" rx="7" ry="13"/>
+            <ellipse cx="12" cy="-11" rx="7" ry="13" transform="rotate(72 12 -11)"/>
+            <ellipse cx="12" cy="-26" rx="7" ry="13" transform="rotate(144 12 -26)"/>
+            <ellipse cx="-12" cy="-26" rx="7" ry="13" transform="rotate(216 -12 -26)"/>
+            <ellipse cx="-12" cy="-11" rx="7" ry="13" transform="rotate(288 -12 -11)"/>
+          </g>
+          <circle cx="0" cy="-18" r="4" fill="var(--gold)" stroke="none"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="scallop">
+    <svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path class="s2" d="M0,22 Q30,4 60,22 T120,22 T180,22 T240,22 T300,22 T360,22 T420,22 T480,22 T540,22 T600,22 T660,22 T720,22 T780,22 T840,22 T900,22 T960,22 T1020,22 T1080,22 T1140,22 T1200,22"/><path class="s1" d="M0,8 Q30,32 60,8 T120,8 T180,8 T240,8 T300,8 T360,8 T420,8 T480,8 T540,8 T600,8 T660,8 T720,8 T780,8 T840,8 T900,8 T960,8 T1020,8 T1080,8 T1140,8 T1200,8"/></svg>
+  </div>
+  <div class="scrolldown"><span data-i18n="scroll">ЛИСТАЙТЕ</span><div class="line"></div></div>
+</section>
+
+<section class="path-section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="path_eyebrow">ЧТО МЫ ДЕЛАЕМ</span>
+      <h2 data-i18n="path_title">Ваша история в Париже</h2>
+    </div>
+    <div class="path-wrap">
+      <div class="services-row">
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="15.2" r="5.6"/>
+            <path d="M12 9.6 L8.8 3.2 L15.2 3.2 Z"/>
+            <path d="M9.8 5.4 L14.2 5.4" stroke-width="1"/>
+            <path d="M6.6 2.2 L8.1 4.4 M17.4 2.2 L15.9 4.4 M12 1.2 L12 3.2" stroke-width=".8"/>
+            <path d="M9 12.4a3.2 3.2 0 016 0" stroke-width="1"/>
+          </svg></div>
+          <span class="num">LE MOMENT</span>
+          <h3 data-i18n="s1_title">Предложение</h3>
+          <p data-i18n="s1_desc">От выбора и покупки кольца и букета до слова «да» — мы продумаем каждую секунду.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24">
+            <path d="M3 10.5h18M8 10.5V7.2a4 4 0 018 0v3.3"/>
+            <path d="M4.3 10.5l1.3 8.3A2 2 0 007.6 20.5h8.8a2 2 0 002-1.7l1.3-8.3"/>
+            <path d="M6 13h12M6.4 15.5h11.2M6.8 18h10.4" stroke-width="1"/>
+            <path d="M9 13v6M12 13v6M15 13v6" stroke-width="1"/>
+            <path d="M5.5 10.5c1-1.3 3-1.6 6.5-1.6s5.5.3 6.5 1.6" stroke-width=".9" stroke-dasharray="1.5 1.5"/>
+          </svg></div>
+          <span class="num">LE PIQUE-NIQUE</span>
+          <h3 data-i18n="s2_title">Пикник</h3>
+          <p data-i18n="s2_desc">Плед, вино и локальные деликатесы — в самых романтичных локациях города.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24">
+            <path d="M4 20.5c0-7 3.6-13 8-13s8 6 8 13"/>
+            <path d="M6.5 19c.3-4.5 2.4-8.5 5.5-8.5s5.2 4 5.5 8.5" stroke-width="1"/>
+            <path d="M9 15.5c.2-2 1.2-4 3-4s2.8 2 3 4" stroke-width=".9"/>
+            <path d="M8.6 8L8.2 4.3M12 7.5V3.3M15.4 8l.4-3.7" stroke-width="1.2"/>
+            <circle cx="8.4" cy="4" r=".8" style="fill:var(--red)"/>
+            <circle cx="12" cy="3" r=".8" style="fill:var(--red)"/>
+            <circle cx="15.6" cy="4" r=".8" style="fill:var(--red)"/>
+            <circle cx="6.5" cy="19" r=".7" stroke-width="1"/>
+            <circle cx="17.5" cy="19" r=".7" stroke-width="1"/>
+          </svg></div>
+          <span class="num">LA GIRL PARTY</span>
+          <h3 data-i18n="s3_title">Девичник</h3>
+          <p data-i18n="s3_desc">Лодка по Сене, Мулен Руж или выезд за город с бенто и шампанским: «Bride to be».</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24">
+            <rect x="6.5" y="2" width="11" height="20" rx="2.4"/>
+            <path d="M10 4.3h4" stroke-width="1.3"/>
+            <circle cx="12" cy="19" r="1"/>
+            <path d="M8.7 7.8h6.6M8.7 10.6h6.6M8.7 13.4h4.2" stroke-width="1"/>
+          </svg></div>
+          <span class="num">LA CONCIERGERIE</span>
+          <h3 data-i18n="s4_title">Консьерж</h3>
+          <p data-i18n="s4_desc">Один человек на связи 24/7 забронирует ресторан и купит билеты на концерты, представления и музеи.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio" id="portfolio">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="pf_eyebrow">ПОРТФОЛИО</span>
+      <h2 data-i18n="pf_title">Что мы уже делали</h2>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-card"><div class="pf-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M3 16l5-5 4 4 3-3 6 6"/></svg></div><p data-i18n="pf1">Предложение на крыше отеля с видом на башню</p></div>
+      <div class="portfolio-card"><div class="pf-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M3 16l5-5 4 4 3-3 6 6"/></svg></div><p data-i18n="pf2">Пикник в парке Монсо</p></div>
+      <div class="portfolio-card"><div class="pf-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M3 16l5-5 4 4 3-3 6 6"/></svg></div><p data-i18n="pf3">Девичник на лодке по Сене</p></div>
+      <div class="portfolio-card"><div class="pf-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M3 16l5-5 4 4 3-3 6 6"/></svg></div><p data-i18n="pf4">Вечер в Мулен Руж</p></div>
+      <div class="portfolio-card"><div class="pf-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M3 16l5-5 4 4 3-3 6 6"/></svg></div><p data-i18n="pf5">Гастро-пикник с видом на Эйфелеву башню</p></div>
+      <div class="portfolio-card"><div class="pf-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M3 16l5-5 4 4 3-3 6 6"/></svg></div><p data-i18n="pf6">Консьерж — вечер в Парижской опере</p></div>
+    </div>
+    <p class="portfolio-note" data-i18n="pf_note">Реальные фотографии добавим по мере съёмок — здесь пока места для них.</p>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="price_eyebrow">ТАРИФЫ</span>
+      <h2 data-i18n="price_title">Пакет услуг на любое событие</h2>
+      <p data-i18n="price_sub">Наши координаторы говорят на русском, французском и английском. Фиксированная цена согласовывается до визита. Депозит 30% подтверждает дату, остаток — по приезде в Париж.</p>
+    </div>
+
+    <div class="price-tabs">
+      <button class="price-tab active" data-tab="proposal" data-i18n="tab_proposal">Предложение</button>
+      <button class="price-tab" data-tab="picnic" data-i18n="tab_picnic">Пикник</button>
+      <button class="price-tab" data-tab="devichnik" data-i18n="tab_devichnik">Девичник</button>
+      <button class="price-tab" data-tab="concierge" data-i18n="tab_concierge">Консьерж</button>
+    </div>
+
+    <div class="price-groups">
+      <div class="price-group active" data-group="proposal">
+        <div class="price-card">
+          <h4 data-i18n="pp1_title">Момент для двоих</h4>
+          <div class="amount">€400</div>
+          <ul>
+            <li data-i18n="pp1_l1">Бронирование столика в лучшем ресторане</li>
+            <li data-i18n="pp1_l2">Бронирование столика с видом на Эйфелеву башню</li>
+            <li data-i18n="pp1_l3">Букет цветов и шампанское для счастливой невесты в отеле</li>
+          </ul>
+          <span class="btn-line" data-pkg="proposal" data-i18n="choose">Выбрать</span>
+        </div>
+        <div class="price-card featured">
+          <span class="tag" data-i18n="popular">Популярный</span>
+          <h4 data-i18n="pp2_title">Её мечта</h4>
+          <div class="amount">€800</div>
+          <ul>
+            <li data-i18n="pp2_l1">Координатор дня на связи</li>
+            <li data-i18n="pp2_l2">Подбор публичной локации</li>
+            <li data-i18n="pp2_l3">Фотограф, 50 минут</li>
+            <li data-i18n="pp2_l4">Эффектная подача букета на подносе перед предложением</li>
+          </ul>
+          <span class="btn-line" data-pkg="proposal" data-i18n="choose">Выбрать</span>
+        </div>
+        <div class="price-card">
+          <h4 data-i18n="pp3_title">Престиж</h4>
+          <div class="amount">€1400</div>
+          <ul>
+            <li data-i18n="pp3_l1">Координатор дня на связи</li>
+            <li data-i18n="pp3_l2">Покупка кольца в Tiffany, Cartier, Chaumet и др.</li>
+            <li data-i18n="pp3_l3">Лодка по Сене</li>
+            <li data-i18n="pp3_l4">Фотограф + видеограф</li>
+            <li data-i18n="pp3_l5">Цветы, музыкант, шампанское</li>
+          </ul>
+          <span class="btn-line" data-pkg="proposal" data-i18n="choose">Выбрать</span>
+        </div>
+        <p class="price-note" data-i18n="pp_note1">* Стоимость кольца оплачивается отдельно от пакета.</p>
+        <p class="price-note" data-i18n="pp_note2">Организация меньше чем за 2 недели — доплата €500 (парижские реалии!).</p>
+      </div>
+
+      <div class="price-group" data-group="picnic">
+        <div class="price-card">
+          <h4 data-i18n="pc1_title">Classique</h4>
+          <div class="amount">€280</div>
+          <ul>
+            <li data-i18n="pc1_l1">Плед, посуда и декор на 2 часа</li>
+            <li data-i18n="pc1_l2">Дегустация французских деликатесов и вина</li>
+            <li data-i18n="pc1_l3">Размещение на лучшей локации</li>
+            <li data-i18n="pc1_l4">Парк Монсо, Марсово поле или набережная</li>
+            <li data-i18n="pc1_l5">Доставка корзины для пикника в отель или на месте</li>
+          </ul>
+          <span class="btn-line" data-pkg="picnic" data-i18n="choose">Выбрать</span>
+        </div>
+        <div class="price-card featured">
+          <span class="tag" data-i18n="popular">Популярный</span>
+          <h4 data-i18n="pc2_title">Gastronomique</h4>
+          <div class="amount">€520</div>
+          <ul>
+            <li data-i18n="pc2_l1">Включён пакет Classique</li>
+            <li data-i18n="pc2_l2">Отборные продукты, вино и десерт</li>
+            <li data-i18n="pc2_l3">Персональная встреча и уборка</li>
+          </ul>
+          <span class="btn-line" data-pkg="picnic" data-i18n="choose">Выбрать</span>
+        </div>
+        <div class="price-card">
+          <h4 data-i18n="pc3_title">Предложение</h4>
+          <div class="amount">€750</div>
+          <ul>
+            <li data-i18n="pc3_l1">Пикник + предложение в одном сценарии</li>
+            <li data-i18n="pc3_l2">Фотограф на расстоянии, деликатно</li>
+            <li data-i18n="pc3_l3">Самая романтичная локация на выбор</li>
+          </ul>
+          <span class="btn-line" data-pkg="picnic" data-i18n="choose">Выбрать</span>
+        </div>
+      </div>
+
+      <div class="price-group" data-group="devichnik">
+        <div class="price-card">
+          <h4 data-i18n="dv1_title">Базовый</h4>
+          <div class="amount">€320</div>
+          <ul>
+            <li data-i18n="dv1_l1">Бенто-торт или макаруны от La Durée / Pierre Hermé</li>
+            <li data-i18n="dv1_l2">Декор «Bride to be» и фата с диадемой</li>
+            <li data-i18n="dv1_l3">Локация в парке или на набережной</li>
+          </ul>
+          <span class="btn-line" data-pkg="devichnik" data-i18n="choose">Выбрать</span>
+        </div>
+        <div class="price-card featured">
+          <span class="tag" data-i18n="popular">Популярный</span>
+          <h4 data-i18n="dv2_title">Круиз по Сене</h4>
+          <div class="amount">€700</div>
+          <ul>
+            <li data-i18n="dv2_l1">2 часа на приватной лодке по Сене</li>
+            <li data-i18n="dv2_l2">Шампанское, декор, плейлист</li>
+            <li data-i18n="dv2_l3">Координация вечера</li>
+            <li data-i18n="dv2_l4">Фотограф перед отправлением</li>
+          </ul>
+          <span class="btn-line" data-pkg="devichnik" data-i18n="choose">Выбрать</span>
+        </div>
+        <div class="price-card">
+          <h4 data-i18n="dv3_title">Престиж</h4>
+          <div class="amount">€1100</div>
+          <ul>
+            <li data-i18n="dv3_l1">Координатор вечера на связи</li>
+            <li data-i18n="dv3_l2">Мулен Руж и бар</li>
+            <li data-i18n="dv3_l3">Ужин или напитки после шоу</li>
+            <li data-i18n="dv3_l4">Трансфер</li>
+          </ul>
+          <span class="btn-line" data-pkg="devichnik" data-i18n="choose">Выбрать</span>
+        </div>
+        <div class="price-card">
+          <h4 data-i18n="dv4_title">Люкс</h4>
+          <div class="amount">€1500</div>
+          <ul>
+            <li data-i18n="dv4_l1">Спа-день с шопингом или загородная поездка</li>
+            <li data-i18n="dv4_l2">Трансфер и координатор на весь день</li>
+            <li data-i18n="dv4_l3">Групповой формат</li>
+          </ul>
+          <span class="btn-line" data-pkg="devichnik" data-i18n="choose">Выбрать</span>
+        </div>
+      </div>
+
+      <div class="price-group" data-group="concierge">
+        <div class="price-card">
+          <h4 data-i18n="cc1_title">Разовый</h4>
+          <div class="amount">от €50</div>
+          <ul>
+            <li data-i18n="cc1_l1">Бронь отеля, ресторана, театра, оперы/балета, музея</li>
+            <li data-i18n="cc1_l2">Фиксированная цена, без счётчика часов</li>
+            <li data-i18n="cc1_l3">Ответ в WhatsApp в течение часа</li>
+          </ul>
+          <span class="btn-line" data-pkg="concierge" data-i18n="choose">Выбрать</span>
+        </div>
+        <div class="price-card featured">
+          <span class="tag" data-i18n="popular">Популярный</span>
+          <h4 data-i18n="cc2_title">Сопровождение визита</h4>
+          <div class="amount">€800</div>
+          <ul>
+            <li data-i18n="cc2_l1">3 дня, персональный консьерж на связи 24/7</li>
+            <li data-i18n="cc2_l2">Координация ресторанов, трансферов, театра и оперы</li>
+            <li data-i18n="cc2_l3">Русский и английский</li>
+          </ul>
+          <span class="btn-line" data-pkg="concierge" data-i18n="choose">Выбрать</span>
+        </div>
+        <div class="price-card">
+          <h4 data-i18n="cc3_title">Организация поездки</h4>
+          <div class="amount">€1000</div>
+          <ul>
+            <li data-i18n="cc3_l1">Гибкое сопровождение по запросу</li>
+            <li data-i18n="cc3_l2">Подбор проживания, маршрута</li>
+            <li data-i18n="cc3_l3">* В подарок — наш парижский гид</li>
+          </ul>
+          <span class="btn-line" data-pkg="concierge" data-i18n="choose">Выбрать</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="booking">
+  <div class="wrap">
+    <div class="booking-grid">
+      <div>
+        <span class="eyebrow" data-i18n="book_eyebrow">БРОНИРОВАНИЕ</span>
+        <h2 class="display" style="font-size:38px; margin-top:14px; color:var(--ink);" data-i18n="book_title">Выберите дату — мы всё продумаем</h2>
+        <div class="book-steps">
+          <div class="book-step"><span class="n">01</span><div><p data-i18n="bs1_d">Выберите пакет и примерную дату события.</p></div></div>
+          <div class="book-step"><span class="n">02</span><div><p data-i18n="bs2_d">Оставьте ваш контакт. Координатор свяжется с вами в WhatsApp, Instagram или Telegram.</p></div></div>
+          <div class="book-step"><span class="n">03</span><div><p data-i18n="bs3_d">Депозит 30% зафиксирует дату в календаре. Оплату можно будет произвести в евро или в рублях.</p></div></div>
+        </div>
+      </div>
+
+      <div class="booking-card">
+        <label class="field-label" data-i18n="lbl_pkg">Пакет</label>
+        <select class="pkg-select" id="pkgSelect">
+          <option value="proposal" selected data-i18n="sel_proposal">Предложение</option>
+          <option value="picnic" data-i18n="sel_picnic">Пикник</option>
+          <option value="devichnik" data-i18n="sel_devichnik">Девичник</option>
+          <option value="concierge" data-i18n="sel_concierge">Консьерж</option>
+        </select>
+
+        <div class="cal-header">
+          <button id="prevMonth">‹</button>
+          <span class="month" id="monthLabel">Август 2026</span>
+          <button id="nextMonth">›</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="legend">
+          <span class="a"><i></i><span data-i18n="leg_free">Свободно</span></span>
+          <span class="b"><i></i><span data-i18n="leg_taken">Занято</span></span>
+          <span class="c"><i></i><span data-i18n="leg_sel">Выбрано</span></span>
+        </div>
+
+        <label class="field-label" data-i18n="lbl_contact">Телефон или тег (Telegram / WhatsApp)</label>
+        <input type="text" id="contactInput" class="text-input" placeholder="+7 900 123 45 67 или @username">
+
+        <div class="summary">
+          <div class="summary-row"><span data-i18n="sum_pkg">Пакет</span><span id="sumPkg">Предложение</span></div>
+          <div class="summary-row total"><span data-i18n="sum_date">Дата</span><span id="sumDate">—</span></div>
+        </div>
+        <button class="pay-btn" id="openPay" disabled><span data-i18n="pay_btn">Оставить заявку</span></button>
+        <div class="stripe-note">
+          <span data-i18n="link_note">Ссылку на оплату депозита пришлём вам в сообщении</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="margin-bottom:16px;">PASSPORT <span>TO PARIS</span></div>
+        <p data-i18n="foot_about">Частная студия организации предложений, пикников, девичников и консьерж-сопровождения в Париже.</p>
+      </div>
+      <div>
+        <h5 data-i18n="foot_contact">Контакты</h5>
+        <p><a href="#" data-i18n="foot_wa">WhatsApp: +33 6 XX XX XX XX</a></p>
+        <p><a href="#">Telegram: @passporttoparis</a></p>
+        <p><a href="#">hello@passporttoparis.fr</a></p>
+      </div>
+      <div>
+        <h5 data-i18n="foot_lang">Язык / Language</h5>
+        <p><a href="#" onclick="setLang('ru');return false;">Русский</a></p>
+        <p><a href="#" onclick="setLang('en');return false;">English</a></p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 PASSPORT TO PARIS</span>
+      <span data-i18n="foot_note">Организатор мероприятий · Paris, France</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <button class="close" id="closeModal">✕</button>
+    <div id="formState">
+      <h3 data-i18n="modal_title">Оставить заявку</h3>
+      <p class="sub" id="modalSummary">Предложение · 12 августа 2026 · +7 900 123 45 67</p>
+      <p class="reminder-note" data-i18n="reminder_note">Убедитесь, что можете получать сообщения с новых номеров и аккаунтов — так мы пришлём вам ссылку на оплату.</p>
+      <button class="btn btn-red" style="width:100%; justify-content:center; margin-top:4px;" id="submitPay" data-i18n="modal_submit">Отправить заявку</button>
+    </div>
+    <div class="success" id="successState">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20 6L9 17l-5-5"/></svg>
+      <h3 style="text-align:center;" data-i18n="success_title">Заявка отправлена</h3>
+      <p class="sub" style="text-align:center;" data-i18n="success_sub">Мы свяжемся с вами и пришлём ссылку на оплату депозита в сообщении.</p>
+      <button class="btn btn-ghost" style="width:100%; justify-content:center; color:var(--ink); border-color:var(--line);" id="closeSuccess" data-i18n="success_close">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const i18n = {
+  ru:{
+    nav_services:"Услуги", nav_portfolio:"Портфолио", nav_pricing:"Тарифы", nav_booking:"Бронирование", nav_contact:"Контакты",
+    hero_eyebrow:"PARIS · ОРГАНИЗАТОРЫ СОБЫТИЙ",
+    hero_title:'ВАШ МОМЕНТ<span class="sub-word">В ПАРИЖЕ</span>',
+    hero_lede:"Организуем вашу мечту в Париже — предложения руки и сердца, пикники, девичники и консьерж-сопровождение.",
+    hero_cta:"Забронировать дату", hero_cta2:"Смотреть тарифы", scroll:"ЛИСТАЙТЕ",
+    path_eyebrow:"ЧТО МЫ ДЕЛАЕМ", path_title:"Ваша история в Париже",
+    s1_title:"Предложение", s1_desc:"От выбора и покупки кольца и букета до слова «да» — мы продумаем каждую секунду.",
+    s2_title:"Пикник", s2_desc:"Плед, вино и локальные деликатесы — в самых романтичных локациях города.",
+    s3_title:"Девичник", s3_desc:"Лодка по Сене, Мулен Руж или выезд за город с бенто и шампанским: «Bride to be».",
+    s4_title:"Консьерж", s4_desc:"Один человек на связи 24/7 забронирует ресторан и купит билеты на концерты, представления и музеи.",
+    pf_eyebrow:"ПОРТФОЛИО", pf_title:"Что мы уже делали",
+    pf1:"Предложение на крыше отеля с видом на башню", pf2:"Пикник в парке Монсо", pf3:"Девичник на лодке по Сене",
+    pf4:"Вечер в Мулен Руж", pf5:"Гастро-пикник с видом на Эйфелеву башню", pf6:"Консьерж — вечер в Парижской опере",
+    pf_note:"Реальные фотографии добавим по мере съёмок — здесь пока места для них.",
+    price_eyebrow:"ТАРИФЫ", price_title:"Пакет услуг на любое событие",
+    price_sub:"Наши координаторы говорят на русском, французском и английском. Фиксированная цена согласовывается до визита. Депозит 30% подтверждает дату, остаток — по приезде в Париж.",
+    tab_proposal:"Предложение", tab_picnic:"Пикник", tab_devichnik:"Девичник", tab_concierge:"Консьерж", popular:"Популярный", choose:"Выбрать", perhour:"/час",
+    pp1_title:"Момент для двоих", pp1_l1:"Бронирование столика в лучшем ресторане", pp1_l2:"Бронирование столика с видом на Эйфелеву башню", pp1_l3:"Букет цветов и шампанское для счастливой невесты в отеле",
+    pp2_title:"Её мечта", pp2_l1:"Координатор дня на связи", pp2_l2:"Подбор публичной локации", pp2_l3:"Фотограф, 50 минут", pp2_l4:"Эффектная подача букета на подносе перед предложением",
+    pp3_title:"Престиж", pp3_l1:"Координатор дня на связи", pp3_l2:"Покупка кольца в Tiffany, Cartier, Chaumet и др.", pp3_l3:"Лодка по Сене", pp3_l4:"Фотограф + видеограф", pp3_l5:"Цветы, музыкант, шампанское",
+    pp_note1:"* Стоимость кольца оплачивается отдельно от пакета.", pp_note2:"Организация меньше чем за 2 недели — доплата €500 (парижские реалии!).",
+    pc1_title:"Classique", pc1_l1:"Плед, посуда и декор на 2 часа", pc1_l2:"Дегустация французских деликатесов и вина", pc1_l3:"Размещение на лучшей локации", pc1_l4:"Парк Монсо, Марсово поле или набережная", pc1_l5:"Доставка корзины для пикника в отель или на месте",
+    pc2_title:"Gastronomique", pc2_l1:"Включён пакет Classique", pc2_l2:"Отборные продукты, вино и десерт", pc2_l3:"Персональная встреча и уборка",
+    pc3_title:"Предложение", pc3_l1:"Пикник + предложение в одном сценарии", pc3_l2:"Фотограф на расстоянии, деликатно", pc3_l3:"Самая романтичная локация на выбор",
+    dv1_title:"Базовый", dv1_l1:"Бенто-торт или макаруны от La Durée / Pierre Hermé", dv1_l2:"Декор «Bride to be» и фата с диадемой", dv1_l3:"Локация в парке или на набережной",
+    dv2_title:"Круиз по Сене", dv2_l1:"2 часа на приватной лодке по Сене", dv2_l2:"Шампанское, декор, плейлист", dv2_l3:"Координация вечера", dv2_l4:"Фотограф перед отправлением",
+    dv3_title:"Престиж", dv3_l1:"Координатор вечера на связи", dv3_l2:"Мулен Руж и бар", dv3_l3:"Ужин или напитки после шоу", dv3_l4:"Трансфер",
+    dv4_title:"Люкс", dv4_l1:"Спа-день с шопингом или загородная поездка", dv4_l2:"Трансфер и координатор на весь день", dv4_l3:"Групповой формат",
+    cc1_title:"Разовый", cc1_l1:"Бронь отеля, ресторана, театра, оперы/балета, музея", cc1_l2:"Фиксированная цена, без счётчика часов", cc1_l3:"Ответ в WhatsApp в течение часа",
+    cc2_title:"Сопровождение визита", cc2_l1:"3 дня, персональный консьерж на связи 24/7", cc2_l2:"Координация ресторанов, трансферов, театра и оперы", cc2_l3:"Русский и английский",
+    cc3_title:"Организация поездки", cc3_l1:"Гибкое сопровождение по запросу", cc3_l2:"Подбор проживания, маршрута", cc3_l3:"* В подарок — наш парижский гид",
+    book_eyebrow:"БРОНИРОВАНИЕ", book_title:"Выберите дату — мы всё продумаем",
+    bs1_d:"Выберите пакет и примерную дату события.",
+    bs2_d:"Оставьте ваш контакт. Координатор свяжется с вами в WhatsApp, Instagram или Telegram.",
+    bs3_d:"Депозит 30% зафиксирует дату в календаре. Оплату можно будет произвести в евро или в рублях.",
+    sel_proposal:"Предложение", sel_picnic:"Пикник", sel_devichnik:"Девичник", sel_concierge:"Консьерж",
+    lbl_pkg:"Пакет", leg_free:"Свободно", leg_taken:"Занято", leg_sel:"Выбрано",
+    sum_pkg:"Пакет", sum_date:"Дата", sum_contact:"Контакт", pay_btn:"Оставить заявку",
+    link_note:"Ссылку на оплату депозита пришлём вам в сообщении",
+    modal_title:"Оставить заявку", lbl_contact:"Телефон или тег (Telegram / WhatsApp)",
+    reminder_note:"Убедитесь, что можете получать сообщения с новых номеров и аккаунтов — так мы пришлём вам ссылку на оплату.",
+    modal_submit:"Отправить заявку",
+    success_title:"Заявка отправлена", success_sub:"Мы свяжемся с вами и пришлём ссылку на оплату депозита в сообщении.", success_close:"Закрыть",
+    foot_about:"Частная студия организации предложений, пикников, девичников и консьерж-сопровождения в Париже.",
+    foot_contact:"Контакты", foot_wa:"WhatsApp: +33 6 XX XX XX XX", foot_lang:"Язык / Language", foot_note:"Организатор мероприятий · Paris, France"
+  },
+  en:{
+    nav_services:"Services", nav_portfolio:"Portfolio", nav_pricing:"Pricing", nav_booking:"Booking", nav_contact:"Contact",
+    hero_eyebrow:"PARIS · PRIVATE CELEBRATION PLANNERS",
+    hero_title:'YOUR MOMENT<span class="sub-word">IN PARIS</span>',
+    hero_lede:"We organize your dream in Paris — proposals, picnics, bachelorette parties and concierge support.",
+    hero_cta:"Reserve your date", hero_cta2:"View pricing", scroll:"SCROLL",
+    path_eyebrow:"WHAT WE DO", path_title:"Four reasons to come to Paris",
+    s1_title:"Proposal", s1_desc:"From choosing and buying the ring and bouquet to the word 'yes' — we plan every second.",
+    s2_title:"Picnic", s2_desc:"A blanket, wine and local delicacies — in the city's most romantic spots.",
+    s3_title:"Bachelorette", s3_desc:"A Seine boat, Moulin Rouge or a countryside escape — bento, champagne and a 'Bride to be' sash.",
+    s4_title:"Concierge", s4_desc:"One person on call 24/7: tickets to concerts, shows and museums, hotel and restaurant bookings.",
+    pf_eyebrow:"PORTFOLIO", pf_title:"A few moments we've created",
+    pf1:"A proposal on a hotel rooftop with a tower view", pf2:"A picnic in Parc Monceau", pf3:"A bachelorette Seine boat party",
+    pf4:"An evening at the Moulin Rouge", pf5:"A gourmet picnic with an Eiffel Tower view", pf6:"Concierge — an evening at the Paris Opera",
+    pf_note:"Real photos will be added as we shoot them — placeholders for now.",
+    price_eyebrow:"PRICING", price_title:"Transparent packages, no surprises",
+    price_sub:"A fixed price is agreed before your visit. A 30% deposit confirms the date, the rest is paid on arrival in Paris.",
+    tab_proposal:"Proposal", tab_picnic:"Picnic", tab_devichnik:"Bachelorette", tab_concierge:"Concierge", popular:"Popular", choose:"Choose", perhour:"/hour",
+    pp1_title:"A Moment for Two", pp1_l1:"Table booking at the best restaurant", pp1_l2:"Table booking with an Eiffel Tower view", pp1_l3:"Bouquet and champagne for the bride-to-be at the hotel",
+    pp2_title:"Her Dream", pp2_l1:"Day coordinator on call", pp2_l2:"Public location selection", pp2_l3:"Photographer, 50 minutes", pp2_l4:"A striking bouquet presentation on a tray before the proposal",
+    pp3_title:"Prestige", pp3_l1:"Day coordinator on call", pp3_l2:"Ring purchase at Tiffany, Cartier, Chaumet, etc.", pp3_l3:"Seine boat", pp3_l4:"Photographer + videographer", pp3_l5:"Flowers, musician, champagne",
+    pp_note1:"* The ring's cost is paid separately from the package.", pp_note2:"Organizing in under 2 weeks — €500 surcharge (Paris realities!).",
+    pc1_title:"Classique", pc1_l1:"Blanket, tableware and décor for 2 hours", pc1_l2:"Tasting of French delicacies and wine", pc1_l3:"Placement at the best location", pc1_l4:"Parc Monceau, Champ de Mars or riverside", pc1_l5:"Basket delivered to your hotel or on site",
+    pc2_title:"Gastronomique", pc2_l1:"Classique package included", pc2_l2:"Curated products, wine and dessert", pc2_l3:"Personal welcome and cleanup",
+    pc3_title:"Proposal", pc3_l1:"Picnic + proposal in one scenario", pc3_l2:"Discreet photographer from a distance", pc3_l3:"The city's most romantic spot, your choice",
+    dv1_title:"Basic", dv1_l1:"Bento cake or macarons from La Durée / Pierre Hermé", dv1_l2:"'Bride to be' décor and a veil with tiara", dv1_l3:"A park or riverside location",
+    dv2_title:"Seine Cruise", dv2_l1:"2 hours on a private Seine boat", dv2_l2:"Champagne, décor, playlist", dv2_l3:"Evening coordination", dv2_l4:"Photographer before departure",
+    dv3_title:"Prestige", dv3_l1:"Evening coordinator on call", dv3_l2:"Moulin Rouge and a bar", dv3_l3:"Dinner or drinks after the show", dv3_l4:"Transfer",
+    dv4_title:"Luxe", dv4_l1:"Spa day with shopping or a countryside trip", dv4_l2:"Transfer and coordinator for the whole day", dv4_l3:"Group format",
+    cc1_title:"One-off", cc1_l1:"Hotel, restaurant, theatre, opera/ballet, museum booking", cc1_l2:"Fixed price, no hourly counter", cc1_l3:"WhatsApp reply within the hour",
+    cc2_title:"Full Stay Support", cc2_l1:"3 days, personal concierge on call 24/7", cc2_l2:"Coordination of restaurants, transfers, theatre and opera", cc2_l3:"Russian and English",
+    cc3_title:"Trip Planning", cc3_l1:"Flexible support on request", cc3_l2:"Accommodation and route planning", cc3_l3:"* Gift — our Paris guide included",
+    book_eyebrow:"BOOKING", book_title:"Pick a date — we'll handle the rest",
+    bs1_d:"Choose a package and an approximate event date.",
+    bs2_d:"Leave your contact. Your coordinator will reach out on WhatsApp, Instagram or Telegram.",
+    bs3_d:"A 30% deposit locks in your date. Payment can be made in euros or rubles.",
+    sel_proposal:"Proposal", sel_picnic:"Picnic", sel_devichnik:"Bachelorette", sel_concierge:"Concierge",
+    lbl_pkg:"Package", leg_free:"Available", leg_taken:"Booked", leg_sel:"Selected",
+    sum_pkg:"Package", sum_date:"Date", sum_contact:"Contact", pay_btn:"Submit Request",
+    link_note:"We'll send your deposit payment link in a message",
+    modal_title:"Submit a Request", lbl_contact:"Phone number or handle (Telegram / WhatsApp)",
+    reminder_note:"Please make sure you can receive messages from new numbers and accounts — that's how we'll send your payment link.",
+    modal_submit:"Send Request",
+    success_title:"Request Sent", success_sub:"We'll reach out and send your deposit payment link in a message.", success_close:"Close",
+    foot_about:"A private studio for proposals, picnics, bachelorette parties and concierge support in Paris.",
+    foot_contact:"Contact", foot_wa:"WhatsApp: +33 6 XX XX XX XX", foot_lang:"Язык / Language", foot_note:"Event planner · Paris, France"
+  }
+};
+let currentLang = 'ru';
+function setLang(lang){
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(i18n[lang][key] !== undefined) el.innerHTML = i18n[lang][key];
+  });
+  document.querySelectorAll('.langswitch button').forEach(b=>{
+    b.classList.toggle('active', b.getAttribute('data-lang')===lang);
+  });
+  document.querySelectorAll('#pkgSelect option').forEach(opt=>{
+    const key = 'sel_' + opt.value;
+    if(i18n[lang][key]) opt.textContent = i18n[lang][key];
+  });
+  updateSummary();
+}
+document.querySelectorAll('.langswitch button').forEach(b=>{
+  b.addEventListener('click', ()=> setLang(b.getAttribute('data-lang')));
+});
+
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', ()=>{ header.classList.toggle('scrolled', window.scrollY > 40); });
+
+document.querySelectorAll('.price-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.price-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const g = tab.getAttribute('data-tab');
+    document.querySelectorAll('.price-group').forEach(pg=>{
+      pg.classList.toggle('active', pg.getAttribute('data-group')===g);
+    });
+  });
+});
+document.querySelectorAll('.btn-line').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const pkgId = btn.getAttribute('data-pkg');
+    const select = document.getElementById('pkgSelect');
+    select.value = pkgId;
+    document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+    updateSummary();
+  });
+});
+
+const monthNames = {
+  ru:["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],
+  en:["January","February","March","April","May","June","July","August","September","October","November","December"]
+};
+const dowShort = { ru:["Пн","Вт","Ср","Чт","Пт","Сб","Вс"], en:["Mo","Tu","We","Th","Fr","Sa","Su"] };
+
+let viewYear = 2026, viewMonth = 7;
+let selectedDate = null;
+const bookedDays = {"2026-7":[3,4,11,12,18,19,25],"2026-8":[1,2,8,9,15,22,23,29]};
+
+function renderCalendar(){
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+  dowShort[currentLang].forEach(d=>{ const el = document.createElement('div'); el.className='dow'; el.textContent = d; grid.appendChild(el); });
+  document.getElementById('monthLabel').textContent = `${monthNames[currentLang][viewMonth]} ${viewYear}`;
+
+  const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+  const offset = (firstDay + 6) % 7;
+  const daysInMonth = new Date(viewYear, viewMonth+1, 0).getDate();
+  const key = `${viewYear}-${viewMonth}`;
+  const taken = bookedDays[key] || [];
+
+  for(let i=0;i<offset;i++){ const b=document.createElement('div'); b.className='cal-day blank'; grid.appendChild(b); }
+  for(let d=1; d<=daysInMonth; d++){
+    const cell = document.createElement('div');
+    cell.className = 'cal-day ' + (taken.includes(d) ? 'taken' : 'avail');
+    cell.textContent = d;
+    if(!taken.includes(d)){
+      cell.addEventListener('click', ()=>{ selectedDate = {y:viewYear, m:viewMonth, d:d}; renderCalendar(); updateSummary(); });
+    }
+    if(selectedDate && selectedDate.y===viewYear && selectedDate.m===viewMonth && selectedDate.d===d){ cell.classList.add('selected'); }
+    grid.appendChild(cell);
+  }
+}
+document.getElementById('prevMonth').addEventListener('click', ()=>{ viewMonth--; if(viewMonth<0){viewMonth=11; viewYear--;} renderCalendar(); });
+document.getElementById('nextMonth').addEventListener('click', ()=>{ viewMonth++; if(viewMonth>11){viewMonth=0; viewYear++;} renderCalendar(); });
+
+const pkgSelect = document.getElementById('pkgSelect');
+pkgSelect.addEventListener('change', updateSummary);
+
+function updateSummary(){
+  const opt = pkgSelect.options[pkgSelect.selectedIndex];
+  document.getElementById('sumPkg').textContent = opt.textContent;
+  const dateEl = document.getElementById('sumDate');
+  const payBtn = document.getElementById('openPay');
+  if(selectedDate){
+    dateEl.textContent = `${selectedDate.d} ${monthNames[currentLang][selectedDate.m]} ${selectedDate.y}`;
+    payBtn.disabled = false;
+  } else {
+    dateEl.textContent = '—';
+    payBtn.disabled = true;
+  }
+}
+
+const modalBg = document.getElementById('modalBg');
+document.getElementById('openPay').addEventListener('click', ()=>{
+  const opt = pkgSelect.options[pkgSelect.selectedIndex];
+  const contactVal = document.getElementById('contactInput').value.trim() || '—';
+  document.getElementById('modalSummary').textContent = `${opt.textContent} · ${selectedDate.d} ${monthNames[currentLang][selectedDate.m]} ${selectedDate.y} · ${contactVal}`;
+  document.getElementById('formState').classList.remove('hidden');
+  document.getElementById('successState').classList.remove('show');
+  modalBg.classList.add('show');
+});
+document.getElementById('closeModal').addEventListener('click', ()=> modalBg.classList.remove('show'));
+modalBg.addEventListener('click', (e)=>{ if(e.target===modalBg) modalBg.classList.remove('show'); });
+document.getElementById('submitPay').addEventListener('click', ()=>{
+  document.getElementById('formState').classList.add('hidden');
+  document.getElementById('successState').classList.add('show');
+});
+document.getElementById('closeSuccess').addEventListener('click', ()=> modalBg.classList.remove('show'));
+
+renderCalendar();
+updateSummary();
+</script>
+</body>
+</html>
