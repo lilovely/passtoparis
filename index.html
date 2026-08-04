@@ -62,7 +62,7 @@
   .sparkle.sp4{ width:15px; height:15px; top:6px; left:76%; fill:var(--pink); animation-delay:1.8s;}
   .sparkle.sp5{ width:24px; height:24px; top:-30px; left:20%; animation-delay:2.3s;}
   @keyframes twinkle{ 0%,100%{opacity:.3; transform:scale(.8) rotate(0deg);} 50%{opacity:1; transform:scale(1.15) rotate(12deg);} }
-  .hero p.lede{ color:rgba(255,255,255,.88); max-width:440px; margin-bottom:36px; font-family:'Jost', sans-serif; font-weight:300; font-style:normal; font-size:16.5px; line-height:1.75; text-shadow:0 2px 12px rgba(0,0,0,.3);}
+  .hero p.lede{ color:rgba(255,255,255,.88); max-width:440px; margin:38px 0 36px; font-family:'Jost', sans-serif; font-weight:300; font-style:normal; font-size:16.5px; line-height:1.75; text-shadow:0 2px 12px rgba(0,0,0,.3);}
   .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
   .btn{ display:inline-flex; align-items:center; gap:10px; padding:15px 30px; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; border-radius:2px; transition:all .3s ease; font-family:'Jost'; font-weight:500;}
   .btn-red{ background:var(--red); color:#fff; border:1px solid var(--red);}
@@ -141,22 +141,6 @@
     background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='%23c31f2e' d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
     background-repeat:no-repeat; background-position:right 12px center; background-size:18px;}
   .booking-card input.text-input{ width:100%; padding:13px 14px; border:1px solid var(--line); background:#fff; font-family:'Jost'; font-size:14px; margin-bottom:26px; color:var(--ink);}
-  .cal-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
-  .cal-header .month{ font-family:'Bebas Neue'; letter-spacing:.02em; font-size:19px;}
-  .cal-header button{ background:none; border:1px solid var(--line); width:30px; height:30px; cursor:pointer; font-family:'Jost'; color:var(--ink);}
-  .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:5px; margin-bottom:26px;}
-  .cal-grid .dow{ font-size:10.5px; text-align:center; color:var(--ink-mute); letter-spacing:.05em; padding-bottom:6px;}
-  .cal-day{ aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:13px; cursor:pointer; border:1px solid var(--line); color:var(--ink); background:#fff;}
-  .cal-day.blank{ visibility:hidden; cursor:default; border:none;}
-  .cal-day.taken{ color:rgba(33,20,23,.28); text-decoration:line-through; cursor:not-allowed; background:rgba(33,20,23,.03); border-color:transparent;}
-  .cal-day.avail:hover{ border-color:var(--red);}
-  .cal-day.selected{ background:var(--red); color:#fff; font-weight:500; border-color:var(--red);}
-  .legend{ display:flex; gap:18px; font-size:11.5px; color:var(--ink-mute); margin-bottom:28px;}
-  .legend span{ display:inline-flex; align-items:center; gap:6px;}
-  .legend i{ width:9px; height:9px; display:inline-block;}
-  .legend .a i{ background:#fff; border:1px solid var(--line);}
-  .legend .b i{ background:rgba(33,20,23,.08);}
-  .legend .c i{ background:var(--red);}
 
   .summary{ border-top:1px solid var(--line); padding-top:22px; margin-top:6px;}
   .summary-row{ display:flex; justify-content:space-between; font-size:13.5px; padding:6px 0; color:var(--ink-mute);}
@@ -480,17 +464,8 @@
           <option value="concierge" data-i18n="sel_concierge">Консьерж</option>
         </select>
 
-        <div class="cal-header">
-          <button id="prevMonth">‹</button>
-          <span class="month" id="monthLabel">Август 2026</span>
-          <button id="nextMonth">›</button>
-        </div>
-        <div class="cal-grid" id="calGrid"></div>
-        <div class="legend">
-          <span class="a"><i></i><span data-i18n="leg_free">Свободно</span></span>
-          <span class="b"><i></i><span data-i18n="leg_taken">Занято</span></span>
-          <span class="c"><i></i><span data-i18n="leg_sel">Выбрано</span></span>
-        </div>
+        <label class="field-label" data-i18n="lbl_date">Примерная дата события</label>
+        <input type="text" id="dateInput" class="text-input" placeholder="например, 12 августа 2026">
 
         <label class="field-label" data-i18n="lbl_contact">Телефон или тег (Telegram / WhatsApp / Instagram)</label>
         <input type="text" id="contactInput" class="text-input" placeholder="+7 900 123 45 67 или @username">
@@ -588,7 +563,7 @@ const i18n = {
     bs2_d:"Оставьте вашу заявку через WhatsApp, Instagram или Telegram. Координатор свяжется с вами в течение часа.",
     bs3_d:"Депозит 30% зафиксирует дату в календаре. Оплату можно будет произвести в евро или в рублях.",
     sel_proposal:"Предложение", sel_picnic:"Пикник", sel_devichnik:"Девичник", sel_concierge:"Консьерж",
-    lbl_pkg:"Пакет", leg_free:"Свободно", leg_taken:"Занято", leg_sel:"Выбрано",
+    lbl_pkg:"Пакет", lbl_date:"Примерная дата события",
     sum_pkg:"Пакет", sum_date:"Дата", sum_contact:"Контакт", pay_btn:"Оставить заявку",
     modal_title:"Оставить заявку", lbl_contact:"Телефон или тег (Telegram / WhatsApp / Instagram)",
     reminder_note:"Убедитесь, что можете получать сообщения с новых номеров и аккаунтов — так мы пришлём вам ссылку на оплату.",
@@ -634,7 +609,7 @@ const i18n = {
     bs2_d:"Submit your request via WhatsApp, Instagram or Telegram. Your coordinator will reach out within the hour.",
     bs3_d:"A 30% deposit locks in your date. Payment can be made in euros or rubles.",
     sel_proposal:"Proposal", sel_picnic:"Picnic", sel_devichnik:"Bachelorette", sel_concierge:"Concierge",
-    lbl_pkg:"Package", leg_free:"Available", leg_taken:"Booked", leg_sel:"Selected",
+    lbl_pkg:"Package", lbl_date:"Approximate event date",
     sum_pkg:"Package", sum_date:"Date", sum_contact:"Contact", pay_btn:"Submit Request",
     modal_title:"Submit a Request", lbl_contact:"Phone number or handle (Telegram / WhatsApp / Instagram)",
     reminder_note:"Please make sure you can receive messages from new numbers and accounts — that's how we'll send your payment link.",
@@ -688,53 +663,19 @@ document.querySelectorAll('.btn-line').forEach(btn=>{
   });
 });
 
-const monthNames = {
-  ru:["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],
-  en:["January","February","March","April","May","June","July","August","September","October","November","December"]
-};
-const dowShort = { ru:["Пн","Вт","Ср","Чт","Пт","Сб","Вс"], en:["Mo","Tu","We","Th","Fr","Sa","Su"] };
-
-let viewYear = 2026, viewMonth = 7;
-let selectedDate = null;
-const bookedDays = {"2026-7":[3,4,11,12,18,19,25],"2026-8":[1,2,8,9,15,22,23,29]};
-
-function renderCalendar(){
-  const grid = document.getElementById('calGrid');
-  grid.innerHTML = '';
-  dowShort[currentLang].forEach(d=>{ const el = document.createElement('div'); el.className='dow'; el.textContent = d; grid.appendChild(el); });
-  document.getElementById('monthLabel').textContent = `${monthNames[currentLang][viewMonth]} ${viewYear}`;
-
-  const firstDay = new Date(viewYear, viewMonth, 1).getDay();
-  const offset = (firstDay + 6) % 7;
-  const daysInMonth = new Date(viewYear, viewMonth+1, 0).getDate();
-  const key = `${viewYear}-${viewMonth}`;
-  const taken = bookedDays[key] || [];
-
-  for(let i=0;i<offset;i++){ const b=document.createElement('div'); b.className='cal-day blank'; grid.appendChild(b); }
-  for(let d=1; d<=daysInMonth; d++){
-    const cell = document.createElement('div');
-    cell.className = 'cal-day ' + (taken.includes(d) ? 'taken' : 'avail');
-    cell.textContent = d;
-    if(!taken.includes(d)){
-      cell.addEventListener('click', ()=>{ selectedDate = {y:viewYear, m:viewMonth, d:d}; renderCalendar(); updateSummary(); });
-    }
-    if(selectedDate && selectedDate.y===viewYear && selectedDate.m===viewMonth && selectedDate.d===d){ cell.classList.add('selected'); }
-    grid.appendChild(cell);
-  }
-}
-document.getElementById('prevMonth').addEventListener('click', ()=>{ viewMonth--; if(viewMonth<0){viewMonth=11; viewYear--;} renderCalendar(); });
-document.getElementById('nextMonth').addEventListener('click', ()=>{ viewMonth++; if(viewMonth>11){viewMonth=0; viewYear++;} renderCalendar(); });
-
 const pkgSelect = document.getElementById('pkgSelect');
+const dateInput = document.getElementById('dateInput');
 pkgSelect.addEventListener('change', updateSummary);
+dateInput.addEventListener('input', updateSummary);
 
 function updateSummary(){
   const opt = pkgSelect.options[pkgSelect.selectedIndex];
   document.getElementById('sumPkg').textContent = opt.textContent;
   const dateEl = document.getElementById('sumDate');
   const payBtn = document.getElementById('openPay');
-  if(selectedDate){
-    dateEl.textContent = `${selectedDate.d} ${monthNames[currentLang][selectedDate.m]} ${selectedDate.y}`;
+  const dateVal = dateInput.value.trim();
+  if(dateVal){
+    dateEl.textContent = dateVal;
     payBtn.disabled = false;
   } else {
     dateEl.textContent = '—';
@@ -746,7 +687,8 @@ const modalBg = document.getElementById('modalBg');
 document.getElementById('openPay').addEventListener('click', ()=>{
   const opt = pkgSelect.options[pkgSelect.selectedIndex];
   const contactVal = document.getElementById('contactInput').value.trim() || '—';
-  document.getElementById('modalSummary').textContent = `${opt.textContent} · ${selectedDate.d} ${monthNames[currentLang][selectedDate.m]} ${selectedDate.y} · ${contactVal}`;
+  const dateVal = dateInput.value.trim() || '—';
+  document.getElementById('modalSummary').textContent = `${opt.textContent} · ${dateVal} · ${contactVal}`;
   document.getElementById('formState').classList.remove('hidden');
   document.getElementById('successState').classList.remove('show');
   modalBg.classList.add('show');
@@ -759,7 +701,6 @@ document.getElementById('submitPay').addEventListener('click', ()=>{
 });
 document.getElementById('closeSuccess').addEventListener('click', ()=> modalBg.classList.remove('show'));
 
-renderCalendar();
 updateSummary();
 </script>
 </body>
