@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PASSPORT TO PARIS — Ваш момент в Париже</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="description" content="Организуем предложения руки и сердца, пикники, девичники и консьерж-сопровождение в Париже. Координаторы говорят на русском, французском и английском.">
 <meta name="keywords" content="предложение руки и сердца в Париже, пикник в Париже, девичник в Париже, консьерж Париж, свадебное предложение Париж">
 <link rel="canonical" href="https://passtoparis.com/">
@@ -221,6 +222,14 @@
     background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='%23c31f2e' d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
     background-repeat:no-repeat; background-position:right 12px center; background-size:18px;}
   .booking-card input.text-input{ width:100%; padding:13px 14px; border:1px solid var(--line); background:#fff; font-family:'Jost'; font-size:14px; margin-bottom:26px; color:var(--ink);}
+  .msg-buttons{ display:flex; gap:10px; margin-bottom:14px;}
+  .msg-btn{ flex:1; display:flex; flex-direction:column; align-items:center; gap:7px; padding:16px 6px; border:1px solid var(--line); text-decoration:none; font-family:'Jost'; font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--ink); transition:all .25s ease;}
+  .msg-btn svg{ width:22px; height:22px; fill:currentColor;}
+  .msg-ig svg{ fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;}
+  .msg-wa:hover{ background:#25D366; border-color:#25D366; color:#fff;}
+  .msg-tg:hover{ background:#229ED9; border-color:#229ED9; color:#fff;}
+  .msg-ig:hover{ background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4); border-color:transparent; color:#fff;}
+  .msg-hint{ font-size:12px; color:var(--ink-mute); text-align:center; margin-top:2px; line-height:1.5;}
 
   .summary{ border-top:1px solid var(--line); padding-top:22px; margin-top:6px;}
   .summary-row{ display:flex; justify-content:space-between; font-size:13.5px; padding:6px 0; color:var(--ink-mute);}
@@ -407,7 +416,6 @@
           <span class="btn-line" data-pkg="proposal" data-i18n="choose">Выбрать</span>
         </div>
         <p class="price-note" data-i18n="pp_note1">* Стоимость кольца оплачивается отдельно от пакета.</p>
-        <p class="price-note" data-i18n="pp_note2">Организация меньше чем за 2 недели — доплата €500 (парижские реалии!).</p>
       </div>
 
       <div class="price-group" data-group="picnic">
@@ -548,14 +556,22 @@
         <label class="field-label" data-i18n="lbl_date">Примерная дата события</label>
         <input type="text" id="dateInput" class="text-input" placeholder="например, 12 августа 2026">
 
-        <label class="field-label" data-i18n="lbl_contact">Телефон или тег (Telegram / WhatsApp / Instagram)</label>
-        <input type="text" id="contactInput" class="text-input" placeholder="+7 900 123 45 67 или @username">
-
-        <div class="summary">
-          <div class="summary-row"><span data-i18n="sum_pkg">Пакет</span><span id="sumPkg">Предложение</span></div>
-          <div class="summary-row total"><span data-i18n="sum_date">Дата</span><span id="sumDate">—</span></div>
+        <label class="field-label" data-i18n="lbl_channel">Напишите нам напрямую</label>
+        <div class="msg-buttons">
+          <a id="waBtn" class="msg-btn msg-wa" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M17 14c-.3-.15-1.7-.85-2-.95-.27-.1-.47-.15-.66.15-.2.3-.76.95-.93 1.15-.17.2-.34.22-.63.07-.3-.15-1.24-.46-2.37-1.47-.87-.78-1.47-1.74-1.64-2.04-.17-.3-.02-.46.13-.6.13-.13.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5h-.56c-.2 0-.5.07-.77.37-.26.3-1 1-1 2.42 0 1.42 1.03 2.8 1.18 3 .15.2 2.03 3.1 4.93 4.35.69.3 1.22.47 1.64.6.69.22 1.32.19 1.81.11.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.56-.35z"/><path d="M12 3a9 9 0 00-7.7 13.6L3 21l4.5-1.3A9 9 0 1012 3z"/></svg>
+            <span>WhatsApp</span>
+          </a>
+          <a id="tgBtn" class="msg-btn msg-tg" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M21 4L2.5 11.3c-1 .4-1 1 .1 1.3l4.7 1.5 1.8 5.7c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.2-2.1 4.5 3.3c.8.5 1.4.2 1.6-.7L22 4.9c.3-1-.3-1.4-1-1z"/></svg>
+            <span>Telegram</span>
+          </a>
+          <a id="igBtn" class="msg-btn msg-ig" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            <span>Instagram</span>
+          </a>
         </div>
-        <button class="pay-btn" id="openPay" disabled><span data-i18n="pay_btn">Оставить заявку</span></button>
+        <p class="msg-hint" data-i18n="msg_hint">В WhatsApp сообщение с выбранным пакетом и датой подставится автоматически.</p>
       </div>
     </div>
   </div>
@@ -581,29 +597,11 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 PASSPORT TO PARIS</span>
+      <span>© 2024 PASSPORT TO PARIS</span>
       <span data-i18n="foot_note">Организатор мероприятий · Paris, France</span>
     </div>
   </div>
 </footer>
-
-<div class="modal-bg" id="modalBg">
-  <div class="modal">
-    <button class="close" id="closeModal">✕</button>
-    <div id="formState">
-      <h3 data-i18n="modal_title">Оставить заявку</h3>
-      <p class="sub" id="modalSummary">Предложение · 12 августа 2026 · +7 900 123 45 67</p>
-      <p class="reminder-note" data-i18n="reminder_note">Убедитесь, что можете получать сообщения с новых номеров и аккаунтов — так мы пришлём вам ссылку на оплату.</p>
-      <button class="btn btn-red" style="width:100%; justify-content:center; margin-top:4px;" id="submitPay" data-i18n="modal_submit">Отправить заявку</button>
-    </div>
-    <div class="success" id="successState">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20 6L9 17l-5-5"/></svg>
-      <h3 style="text-align:center;" data-i18n="success_title">Заявка отправлена</h3>
-      <p class="sub" style="text-align:center;" data-i18n="success_sub">Мы свяжемся с вами и пришлём ссылку на оплату депозита в сообщении.</p>
-      <button class="btn btn-ghost" style="width:100%; justify-content:center; color:var(--ink); border-color:var(--line);" id="closeSuccess" data-i18n="success_close">Закрыть</button>
-    </div>
-  </div>
-</div>
 
 <script>
 const i18n = {
@@ -629,7 +627,7 @@ const i18n = {
     pp1_title:"Момент для двоих", pp1_l1:"Бронирование столика в ресторане Мишлен", pp1_l2:"Бронирование столика с видом на Эйфелеву башню", pp1_l3:"Доставка букета цветов и шампанского для счастливой пары в отель",
     pp2_title:"Её мечта", pp2_l1:"Координатор дня на связи", pp2_l2:"Подбор публичной локации", pp2_l3:"Фотограф (50 минут)", pp2_l4:"Эффектная подача букета после предложения",
     pp3_title:"Престиж", pp3_l1:"Координатор дня на связи", pp3_l2:"Подбор локации или круиз по Сене", pp3_l3:"Покупка кольца в Tiffany, Cartier, Chaumet и др.", pp3_l4:"Фотограф + видеограф на время события", pp3_l5:"Эффектная подача букета после предложения",
-    pp_note1:"* Стоимость кольца оплачивается отдельно от пакета.", pp_note2:"Организация меньше чем за 2 недели — доплата €500 (парижские реалии!).", or_word:"или",
+    pp_note1:"* Стоимость кольца оплачивается отдельно от пакета.", or_word:"или",
     pc1_title:"Романтика", pc1_l1:"Плед, посуда и декор на 2 часа", pc1_l2:"Дегустация французских деликатесов и вина", pc1_l3:"Размещение на лучшей локации", pc1_l4:"Парк Монсо, Марсово поле или набережная", pc1_l5:"Доставка корзины для пикника в отель или на месте",
     pc2_title:"Гурмэ", pc2_l1:"Включён пакет Романтика", pc2_l2:"Отборные продукты и вино", pc2_l3:"Десерт от La Durée или Pierre Hermé", pc2_l4:"Букет цветов для вашей половинки", pc2_l5:"Персональная встреча и уборка",
     pc3_title:"Предложение", pc3_l1:"Включён пакет Гурмэ", pc3_l2:"Пикник + предложение в одном сценарии", pc3_l3:"Фотограф на расстоянии, деликатно", pc3_l4:"Самая романтичная локация на выбор",
@@ -644,7 +642,7 @@ const i18n = {
     bs2_d:"Оставьте вашу заявку через WhatsApp, Instagram или Telegram. Координатор свяжется с вами в течение часа.",
     bs3_d:"Депозит 30% зафиксирует дату в календаре. Оплату можно будет произвести в евро или в рублях.",
     sel_proposal:"Предложение", sel_picnic:"Пикник", sel_devichnik:"Девичник", sel_concierge:"Консьерж",
-    lbl_pkg:"Пакет", lbl_date:"Примерная дата события",
+    lbl_pkg:"Пакет", lbl_date:"Примерная дата события", lbl_channel:"Напишите нам напрямую", msg_hint:"В WhatsApp сообщение с выбранным пакетом и датой подставится автоматически.",
     sum_pkg:"Пакет", sum_date:"Дата", sum_contact:"Контакт", pay_btn:"Оставить заявку",
     modal_title:"Оставить заявку", lbl_contact:"Телефон или тег (Telegram / WhatsApp / Instagram)",
     reminder_note:"Убедитесь, что можете получать сообщения с новых номеров и аккаунтов — так мы пришлём вам ссылку на оплату.",
@@ -675,7 +673,7 @@ const i18n = {
     pp1_title:"A Moment for Two", pp1_l1:"Table booking at a Michelin restaurant", pp1_l2:"Table booking with an Eiffel Tower view", pp1_l3:"Bouquet and champagne delivered to the hotel for the happy couple",
     pp2_title:"Her Dream", pp2_l1:"Day coordinator on call", pp2_l2:"Public location selection", pp2_l3:"Photographer (50 minutes)", pp2_l4:"A striking bouquet presentation after the proposal",
     pp3_title:"Prestige", pp3_l1:"Day coordinator on call", pp3_l2:"Location selection or a Seine cruise", pp3_l3:"Ring purchase at Tiffany, Cartier, Chaumet, etc.", pp3_l4:"Photographer + videographer for the event", pp3_l5:"A striking bouquet presentation after the proposal",
-    pp_note1:"* The ring's cost is paid separately from the package.", pp_note2:"Organizing in under 2 weeks — €500 surcharge (Paris realities!).", or_word:"or",
+    pp_note1:"* The ring's cost is paid separately from the package.", or_word:"or",
     pc1_title:"Romance", pc1_l1:"Blanket, tableware and décor for 2 hours", pc1_l2:"Tasting of French delicacies and wine", pc1_l3:"Placement at the best location", pc1_l4:"Parc Monceau, Champ de Mars or riverside", pc1_l5:"Basket delivered to your hotel or on site",
     pc2_title:"Gourmet", pc2_l1:"Romance package included", pc2_l2:"Curated products and wine", pc2_l3:"Dessert from La Durée or Pierre Hermé", pc2_l4:"A bouquet for your other half", pc2_l5:"Personal welcome and cleanup",
     pc3_title:"Proposal", pc3_l1:"Gourmet package included", pc3_l2:"Picnic + proposal in one scenario", pc3_l3:"Discreet photographer from a distance", pc3_l4:"The city's most romantic spot, your choice",
@@ -690,7 +688,7 @@ const i18n = {
     bs2_d:"Submit your request via WhatsApp, Instagram or Telegram. Your coordinator will reach out within the hour.",
     bs3_d:"A 30% deposit locks in your date. Payment can be made in euros or rubles.",
     sel_proposal:"Proposal", sel_picnic:"Picnic", sel_devichnik:"Bachelorette", sel_concierge:"Concierge",
-    lbl_pkg:"Package", lbl_date:"Approximate event date",
+    lbl_pkg:"Package", lbl_date:"Approximate event date", lbl_channel:"Message us directly", msg_hint:"For WhatsApp, your selected package and date will be added to the message automatically.",
     sum_pkg:"Package", sum_date:"Date", sum_contact:"Contact", pay_btn:"Submit Request",
     modal_title:"Submit a Request", lbl_contact:"Phone number or handle (Telegram / WhatsApp / Instagram)",
     reminder_note:"Please make sure you can receive messages from new numbers and accounts — that's how we'll send your payment link.",
@@ -715,7 +713,7 @@ function setLang(lang){
     const key = 'sel_' + opt.value;
     if(i18n[lang][key]) opt.textContent = i18n[lang][key];
   });
-  updateSummary();
+  if(typeof updateMsgLinks === 'function') updateMsgLinks();
 }
 document.querySelectorAll('.langswitch button').forEach(b=>{
   b.addEventListener('click', ()=> setLang(b.getAttribute('data-lang')));
@@ -740,49 +738,33 @@ document.querySelectorAll('.btn-line').forEach(btn=>{
     const select = document.getElementById('pkgSelect');
     select.value = pkgId;
     document.getElementById('booking').scrollIntoView({behavior:'smooth'});
-    updateSummary();
+    if(typeof updateMsgLinks === 'function') updateMsgLinks();
   });
 });
 
 const pkgSelect = document.getElementById('pkgSelect');
 const dateInput = document.getElementById('dateInput');
-pkgSelect.addEventListener('change', updateSummary);
-dateInput.addEventListener('input', updateSummary);
 
-function updateSummary(){
+// ЗАМЕНИТЕ на реальные данные:
+const WA_NUMBER = '33600000000'; // номер WhatsApp в международном формате, только цифры, без + и пробелов
+const TG_USERNAME = 'passtoparis'; // юзернейм Telegram без @
+const IG_USERNAME = 'passtoparis'; // юзернейм Instagram без @
+
+function updateMsgLinks(){
   const opt = pkgSelect.options[pkgSelect.selectedIndex];
-  document.getElementById('sumPkg').textContent = opt.textContent;
-  const dateEl = document.getElementById('sumDate');
-  const payBtn = document.getElementById('openPay');
   const dateVal = dateInput.value.trim();
-  if(dateVal){
-    dateEl.textContent = dateVal;
-    payBtn.disabled = false;
-  } else {
-    dateEl.textContent = '—';
-    payBtn.disabled = true;
-  }
+  const greeting = currentLang === 'en' ? 'Hello! I would like to ask about' : 'Здравствуйте! Хочу узнать про';
+  const dateText = dateVal ? (currentLang === 'en' ? ` on ${dateVal}` : ` на ${dateVal}`) : '';
+  const text = `${greeting}: ${opt.textContent}${dateText}`;
+  document.getElementById('waBtn').href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+  document.getElementById('tgBtn').href = `https://t.me/${TG_USERNAME}`;
+  document.getElementById('igBtn').href = `https://instagram.com/${IG_USERNAME}`;
 }
+pkgSelect.addEventListener('change', updateMsgLinks);
+dateInput.addEventListener('input', updateMsgLinks);
 
-const modalBg = document.getElementById('modalBg');
-document.getElementById('openPay').addEventListener('click', ()=>{
-  const opt = pkgSelect.options[pkgSelect.selectedIndex];
-  const contactVal = document.getElementById('contactInput').value.trim() || '—';
-  const dateVal = dateInput.value.trim() || '—';
-  document.getElementById('modalSummary').textContent = `${opt.textContent} · ${dateVal} · ${contactVal}`;
-  document.getElementById('formState').classList.remove('hidden');
-  document.getElementById('successState').classList.remove('show');
-  modalBg.classList.add('show');
-});
-document.getElementById('closeModal').addEventListener('click', ()=> modalBg.classList.remove('show'));
-modalBg.addEventListener('click', (e)=>{ if(e.target===modalBg) modalBg.classList.remove('show'); });
-document.getElementById('submitPay').addEventListener('click', ()=>{
-  document.getElementById('formState').classList.add('hidden');
-  document.getElementById('successState').classList.add('show');
-});
-document.getElementById('closeSuccess').addEventListener('click', ()=> modalBg.classList.remove('show'));
-
-updateSummary();
+setLang('ru');
+updateMsgLinks();
 </script>
 </body>
 </html>
