@@ -171,7 +171,7 @@
   .service-icon{ width:80px; height:80px; margin:0 auto 22px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 1px var(--line);}
   .service-icon img{ width:100%; height:100%; object-fit:cover; display:block;}
   .service-card .num{ color:var(--red); font-size:15px; letter-spacing:.08em; display:block; margin-bottom:8px; font-weight:500; font-family:'Cormorant Garamond'; font-style:italic;}
-  .service-card h3{ font-family:'Jost', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.02em; font-size:21px; color:var(--ink); margin-bottom:10px;}
+  .service-card h3{ font-family:'Jost', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.02em; font-size:21px; color:var(--ink); margin-bottom:10px; line-height:1.15; min-height:2.3em; display:flex; align-items:center;}
   .service-card p{ color:var(--ink-mute); font-size:13.5px; line-height:1.72;}
 
   .portfolio{ background:var(--paper); padding:60px 0 60px;}
@@ -253,6 +253,7 @@
 
   @media (max-width:860px){
     .services-row{ grid-template-columns:1fr 1fr; grid-auto-rows:1fr; gap:20px;}
+    .service-card h3{ font-size:17px;}
     .portfolio-grid{ grid-template-columns:1fr 1fr;}
     .price-group.active, .price-group[data-group="devichnik"].active{ grid-template-columns:1fr;}
     .booking-grid{ grid-template-columns:1fr;}
