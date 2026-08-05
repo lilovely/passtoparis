@@ -15,6 +15,70 @@
 <meta property="og:image" content="https://passtoparis.com/hero-paris.jpg">
 <meta property="og:locale" content="ru_RU">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Passport to Paris",
+  "image": "https://passtoparis.com/hero-paris.jpg",
+  "url": "https://passtoparis.com/",
+  "priceRange": "€€€",
+  "description": "Организуем предложения руки и сердца, пикники, девичники и консьерж-сопровождение в Париже. Координаторы говорят на русском, французском и английском.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Paris",
+    "addressCountry": "FR"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Paris"
+  },
+  "availableLanguage": ["Russian", "English", "French"],
+  "sameAs": [
+    "https://t.me/passtoparis",
+    "https://instagram.com/passtoparis"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Услуги Passport to Paris",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Предложение руки и сердца в Париже",
+          "description": "Организация предложения руки и сердца: локация, фотограф, декор, покупка кольца и букета."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Романтический пикник в Париже",
+          "description": "Пикник в самых романтичных локациях Парижа с вином и деликатесами."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Девичник в Париже",
+          "description": "Круиз по Сене, Мулен Руж или загородная поездка для девичника."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Консьерж-сервис в Париже",
+          "description": "Бронирование ресторанов, отелей, театров и билетов на мероприятия в Париже."
+        }
+      }
+    ]
+  }
+}
+</script>
+
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PASSPORT TO PARIS — Ваш момент в Париже">
 <meta name="twitter:description" content="Организуем предложения руки и сердца, пикники, девичники и консьерж-сопровождение в Париже.">
@@ -101,8 +165,8 @@
   .section-head p{ color:var(--ink-mute); margin-top:16px; font-size:15.5px; line-height:1.7;}
 
   .path-wrap{ position:relative; max-width:1080px; margin:0 auto; padding:0 20px;}
-  .services-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:28px; position:relative; z-index:1;}
-  .service-card{ text-align:center; padding:34px 18px; background:#fff; box-shadow:var(--shadow); border-radius:2px; transition:transform .3s ease;}
+  .services-row{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:1fr; gap:28px; position:relative; z-index:1;}
+  .service-card{ text-align:center; padding:34px 18px; background:#fff; box-shadow:var(--shadow); border-radius:2px; transition:transform .3s ease; display:flex; flex-direction:column; align-items:center; height:100%; box-sizing:border-box;}
   .service-card:hover{ transform:translateY(-6px);}
   .service-icon{ width:80px; height:80px; margin:0 auto 22px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 1px var(--line);}
   .service-icon img{ width:100%; height:100%; object-fit:cover; display:block;}
@@ -188,7 +252,7 @@
   .foot-bottom{ display:flex; justify-content:space-between; padding-top:26px; border-top:1px solid var(--line); font-size:11.5px; color:var(--ink-mute); flex-wrap:wrap; gap:10px;}
 
   @media (max-width:860px){
-    .services-row{ grid-template-columns:1fr 1fr; gap:20px;}
+    .services-row{ grid-template-columns:1fr 1fr; grid-auto-rows:1fr; gap:20px;}
     .portfolio-grid{ grid-template-columns:1fr 1fr;}
     .price-group.active, .price-group[data-group="devichnik"].active{ grid-template-columns:1fr;}
     .booking-grid{ grid-template-columns:1fr;}
